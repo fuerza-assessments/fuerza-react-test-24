@@ -23,7 +23,7 @@ export async function Header() {
 							<Button>Sign Out</Button>
 						</Link>
 					) : (
-						<Link href='/api/auth/signin/google'>
+						<Link href='/api/auth/signin/github'>
 							<Button>Sign In</Button>
 						</Link>
 					)}
