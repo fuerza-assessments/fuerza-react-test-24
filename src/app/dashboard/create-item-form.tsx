@@ -16,7 +16,7 @@ export function CreateItemForm() {
 	const [formState, onCreateItemAction] = useFormState(createItemAction, {
 		form: {
 			name: '',
-			quantity: '1',
+			quantity: '2',
 		},
 		status: 'default',
 	})

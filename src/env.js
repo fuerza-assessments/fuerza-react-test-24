@@ -17,6 +17,9 @@ export const env = createEnv({
 		GITHUB_SECRET: z.string(),
 		GOOGLE_ID: z.string(),
 		GOOGLE_SECRET: z.string(),
+		AUTH0_CLIENT_ID: z.string(),
+		AUTH0_CLIENT_SECRET: z.string(),
+		AUTH0_ISSUER: z.string(),
 		NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
 		NEXTAUTH_URL: z.preprocess(
 			// This makes Vercel deployments not fail if you don't set NEXTAUTH_URL
@@ -38,6 +41,9 @@ export const env = createEnv({
 		GITHUB_SECRET: process.env.GITHUB_SECRET,
 		GOOGLE_ID: process.env.GOOGLE_ID,
 		GOOGLE_SECRET: process.env.GOOGLE_SECRET,
+		AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
+		AUTH0_CLIENT_SECRET: process.env.AUTH0_CLIENT_SECRET,
+		AUTH0_ISSUER: process.env.AUTH0_ISSUER,
 		NODE_ENV: process.env.NODE_ENV,
 		NEXTAUTH_URL: process.env.NEXTAUTH_URL ?? `https://${process.env.VERCEL_URL}`,
 	},

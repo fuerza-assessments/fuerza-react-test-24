@@ -1,4 +1,3 @@
-import { CreateItemForm } from './create-item-form'
 import { ItemsTable } from './items-table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getItems } from '@/data-access/items/get-items.persistence'
@@ -11,7 +10,7 @@ export default async function Dashboard() {
 	const [lowItems, normalItems] = partition(itemsInStock, item => item.isLow)
 
 	return (
-		<main className='grid grid-cols-3 p-12 gap-12 max-w-screen-xl mx-auto'>
+		<>
 			<div className='col-span-3 md:col-span-2'>
 				<h1 className='text-4xl mb-8'>Stock</h1>
 
@@ -32,9 +31,6 @@ export default async function Dashboard() {
 					</TabsContent>
 				</Tabs>
 			</div>
-			<div className='col-span-3 md:col-span-1'>
-				<CreateItemForm />
-			</div>
-		</main>
+		</>
 	)
 }

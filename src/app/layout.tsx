@@ -31,10 +31,12 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en' suppressHydrationWarning>
-			<body className={`${inter.className} ${versos.variable} antialiased`}>
+			<body className={` ${inter.className} ${versos.variable} antialiased`}>
 				<ContextProvider>
-					<Header />
-					{children}
+					<div className='px-4 flex flex-col min-h-screen'>
+						<Header />
+						{children}
+					</div>
 					<Toaster />
 				</ContextProvider>
 			</body>

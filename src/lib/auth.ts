@@ -4,6 +4,7 @@ import type { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from 
 import { AuthOptions, DefaultSession, getServerSession } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
+import Auth0Provider from 'next-auth/providers/auth0'
 
 import { env } from '@/env'
 
@@ -36,6 +37,11 @@ export const authConfig = {
 					return profile
 				},
 			},
+		}),
+		Auth0Provider({
+			clientId: env.AUTH0_CLIENT_ID,
+			clientSecret: env.AUTH0_CLIENT_SECRET,
+			issuer: env.AUTH0_ISSUER,
 		}),
 	],
 	callbacks: {
