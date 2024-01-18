@@ -3,7 +3,8 @@ import { DrizzleAdapter } from '@auth/drizzle-adapter'
 import type { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from 'next'
 import { AuthOptions, DefaultSession, getServerSession } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
-import { unstable_noStore } from 'next/cache'
+import GoogleProvider from 'next-auth/providers/google'
+
 import { env } from '@/env'
 
 declare module 'next-auth' {
@@ -20,9 +21,13 @@ export const authConfig = {
 		strategy: 'jwt',
 	},
 	providers: [
+		GoogleProvider({
+			clientId: env.GOOGLE_ID,
+			clientSecret: env.GOOGLE_SECRET,
+		}),
 		GithubProvider({
-			clientId: env.GITHUB_ID ?? '',
-			clientSecret: env.GITHUB_SECRET ?? '',
+			clientId: env.GITHUB_ID,
+			clientSecret: env.GITHUB_SECRET,
 			authorization: 'https://github.com/login/oauth/authorize?scope=read:user+user:email+read:org',
 			userinfo: {
 				url: 'https://api.github.com/user',
@@ -69,7 +74,6 @@ export const authConfig = {
 
 // Use it in server contexts
 export async function auth(...args: [GetServerSidePropsContext['req'], GetServerSidePropsContext['res']] | [NextApiRequest, NextApiResponse] | []) {
-	unstable_noStore()
 	const session = await getServerSession(...args, authConfig)
 	return { getUser: () => session?.user && { userId: session.user.id } }
 }
