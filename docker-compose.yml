@@ -1,13 +1,13 @@
 version: "3.9"
 services:
-  Stock-tracker-db:
+  stock-tracker-db:
     image: postgres
     restart: always
-    container_name: Stock-tracker-db
+    container_name: stock-tracker-db
     ports:
       - 5435:5432
     environment:
-      POSTGRES_PASSWORD: example
+      POSTGRES_PASSWORD: docker
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres

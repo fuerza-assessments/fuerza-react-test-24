@@ -61,6 +61,10 @@ export const authConfig = {
 			return session
 		},
 	},
+	pages: {
+		signIn: '/sign-in',
+		signOut: '/sign-in',
+	},
 } satisfies AuthOptions
 
 // Use it in server contexts
