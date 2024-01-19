@@ -28,13 +28,9 @@
       "recommended": true
     }
   },
-    "files": {
-      "include": [
-        "scripts/**/*.js",
-        "src/**/*.js"
-      ],
-      "ignore": [
-        "scripts/**/*.js"
-      ]
-    }
+  "files": {
+    "ignore": [
+      "scripts/**/*.js"
+    ]
+  }
 }
