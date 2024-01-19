@@ -35,7 +35,7 @@ export async function addTierListItem(ctx: CTX, data: TierItem) {
 
 		if (tierListItem.getName() === data.name) {
 			throw new Error(
-				`The item you are trying to add, named ${data.name}, already exists in the tier list. It is currently placed in Tier [Existing Item Tier Position].`,
+				`The item you are trying to add, named ${data.name}, already exists in the tier list. It is currently placed in Tier ${tierListItem.getPosition()}.`,
 			)
 		}
 
