@@ -12,20 +12,17 @@ export type Item = {
 	position: number
 }
 
-export function TierTable({ items }: { items: Item[] }) {
-	const columns: ColumnDef<Item>[] = useMemo(
-		() => [
-			{
-				accessorKey: 'position',
-				header: 'Position',
-			},
-			{
-				accessorKey: 'name',
-				header: 'Name',
-			},
-		],
-		[],
-	)
+export function RankTable({ items }: { items: Item[] }) {
+	const columns: ColumnDef<Item>[] = [
+		{
+			accessorKey: 'position',
+			header: 'Position',
+		},
+		{
+			accessorKey: 'name',
+			header: 'Name',
+		},
+	]
 
 	const table = useReactTable({
 		data: items,
@@ -33,6 +30,7 @@ export function TierTable({ items }: { items: Item[] }) {
 		autoResetPageIndex: false,
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
+
 		state: {
 			sorting: [{ id: 'name', desc: false }],
 		},

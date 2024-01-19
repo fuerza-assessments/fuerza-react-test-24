@@ -4,22 +4,25 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useFormState, useFormStatus } from 'react-dom'
-import { HTMLAttributes, useEffect, useRef } from 'react'
+import { HTMLAttributes, useState, useEffect, useRef } from 'react'
 import { useToast } from '@/components/ui/use-toast'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Terminal } from 'lucide-react'
-import { createItemAction } from './_actions/add-item-to-list.action'
+import { addRankListItemAction } from './_actions/add-item-to-list.action'
 import { cn } from '@/lib/utils'
 
 export function AddItemForm() {
 	const { toast } = useToast()
-	const [formState, onCreateItemAction] = useFormState(createItemAction, {
+	const [formState, onCreateItemAction] = useFormState(addRankListItemAction, {
 		form: {
 			name: '',
 			position: '1',
 		},
 		status: 'default',
 	})
+
+	const [name, setName] = useState('')
+	const [position, setPosition] = useState('1')
 
 	const formRef = useRef<HTMLFormElement>(null)
 
@@ -33,17 +36,24 @@ export function AddItemForm() {
 		}
 	}, [toast, formState])
 
+	const onSubmit = (formData: FormData) => {
+		const data = formData
+		data.append('name', name)
+		data.append('position', position)
+		onCreateItemAction(data)
+	}
+
 	return (
 		<>
-			<h2 className='text-3xl mb-8'>Add item to tier list</h2>
+			<h2 className='text-3xl mb-8'>Add item to rank list</h2>
 			{formState.status === 'error' && (
 				<Alert variant={'destructive'}>
 					<Terminal className='h-4 w-4' />
-					<AlertTitle>Uh oh!</AlertTitle>
+					<AlertTitle>Oops!</AlertTitle>
 					<AlertDescription>{formState.errors}</AlertDescription>
 				</Alert>
 			)}
-			<form ref={formRef} action={onCreateItemAction} className='flex flex-col gap-4'>
+			<form ref={formRef} action={onSubmit} className='flex flex-col gap-4'>
 				<div className='flex flex-col gap-' />
 				<Label htmlFor='item-name'>Name</Label>
 				<Input
@@ -51,12 +61,13 @@ export function AddItemForm() {
 					name='name'
 					id='item-name'
 					autoFocus
+					onChange={e => setName(e.target.value)}
 					hasError={formState.status === 'field-errors' && !!formState.errors.name}
 				/>
 				{formState.status === 'field-errors' && <ErrorComponent error={formState.errors.name} />}
 
 				<Label htmlFor='position'>Position</Label>
-				<Input defaultValue={formState.form.position} name='position' type='number' id='position' autoFocus />
+				<Input defaultValue={formState.form.position} name='position' type='number' id='position' autoFocus onChange={e => setPosition(e.target.value)} />
 				{formState.status === 'field-errors' && <ErrorComponent error={formState.errors.position} />}
 
 				<SubmitButton idleText='Add Item' submittingText='Adding Item...' />

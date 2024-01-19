@@ -1,10 +1,9 @@
 'use server'
 
-import { createItem } from '@/data-access/items/create-item.persistence'
-import { getUserItemByName } from '@/data-access/items/get-items-by-name.persistence'
-import { updateItem } from '@/data-access/items/update-item.persistence'
+import { createRankListItem } from '@/data-access/rank-list/create-rank-list-item.persistence'
+import { getRankListItem } from '@/data-access/rank-list/get-rank-list-item.persistence'
 import { auth } from '@/lib/auth'
-import { createItemUseCase } from '@/use-cases/tier-list/add-item.use-case'
+import { addRankListItem } from '@/use-cases/rank-list/add-item.use-case'
 import { ValidationError } from '@/use-cases/utils'
 import { revalidatePath } from 'next/cache'
 
@@ -33,7 +32,7 @@ type SuccessState = {
 
 type CreateItemState = { form: Form } & (SuccessState | SubmitErrorState | FieldErrorsState | DefaultState)
 
-export async function createItemAction(state: CreateItemState, formData: FormData): Promise<CreateItemState> {
+export async function addRankListItemAction(state: CreateItemState, formData: FormData): Promise<CreateItemState> {
 	const { getUser } = await auth()
 
 	const submittedForm = {
@@ -42,13 +41,8 @@ export async function createItemAction(state: CreateItemState, formData: FormDat
 	}
 
 	try {
-		await createItemUseCase(
-			{
-				getUser,
-				createItem: createItem,
-				updateItem: updateItem,
-				getUserItemByName: getUserItemByName,
-			},
+		await addRankListItem(
+			{ getUser, createRankListItem, getRankListItem },
 			{
 				name: submittedForm.name.toLowerCase(),
 				position: parseInt(submittedForm.position),

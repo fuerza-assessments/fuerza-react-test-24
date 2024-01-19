@@ -1,8 +1,8 @@
 'use client'
 
 import * as React from 'react'
-import { useEffect, useMemo } from 'react'
-import { ColumnDef, flexRender, getCoreRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
+import { useEffect } from 'react'
+import { ColumnDef, flexRender, getCoreRowModel, getSortedRowModel, useReactTable, type SortingState } from '@tanstack/react-table'
 import { Minus, MoreHorizontal, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
@@ -24,6 +24,7 @@ export type Item = {
 
 export function ItemsTable({ items }: { items: Item[] }) {
 	const { toast } = useToast()
+	const [sorting, setSorting] = React.useState<SortingState>([])
 
 	const [unmarkLowState, unmarkAsLow] = useFormState(unmarkAsLowAction, {
 		showToast: false,
@@ -85,75 +86,72 @@ export function ItemsTable({ items }: { items: Item[] }) {
 			})
 	}, [toast, incrementState])
 
-	const columns: ColumnDef<Item>[] = useMemo(
-		() => [
-			{
-				accessorKey: 'name',
-				header: 'Name',
+	const columns: ColumnDef<Item>[] = [
+		{
+			accessorKey: 'name',
+			header: 'Name',
+		},
+		{
+			accessorKey: 'quantity',
+			header: 'Quantity',
+			cell: ({ row }) => {
+				return (
+					<form className='flex gap-2 items-center'>
+						<input type='hidden' name='itemId' value={row.original.id} />
+						<button type='submit' className='disabled:text-gray-600' disabled={row.original.quantity === 0} formAction={decrementAction}>
+							<Minus />
+						</button>
+						{row.original.quantity}
+						<button type='submit' formAction={incrementAction}>
+							<Plus />
+						</button>
+					</form>
+				)
 			},
-			{
-				accessorKey: 'quantity',
-				header: 'Quantity',
-				cell: ({ row }) => {
-					return (
-						<form className='flex gap-2 items-center'>
-							<input type='hidden' name='itemId' value={row.original.id} />
-							<button type='submit' className='disabled:text-gray-600' disabled={row.original.quantity === 0} formAction={decrementAction}>
-								<Minus />
-							</button>
-							{row.original.quantity}
-							<button type='submit' formAction={incrementAction}>
-								<Plus />
-							</button>
-						</form>
-					)
-				},
-			},
-			{
-				id: 'actions',
-				enableHiding: false,
-				cell: ({ row }) => {
-					return (
-						<DropdownMenu>
-							<DropdownMenuTrigger asChild>
-								<Button variant='ghost' className='h-8 w-8 p-0'>
-									<span className='sr-only'>Open menu</span>
-									<MoreHorizontal className='h-4 w-4' />
-								</Button>
-							</DropdownMenuTrigger>
-							<DropdownMenuContent align='end'>
-								{row.original.isLow ? (
-									<DropdownMenuItem>
-										<form action={unmarkAsLow}>
-											<input type='hidden' value={row.original.id} name='itemId' />
-											<button type='button'>Unmark as Low</button>
-										</form>
-									</DropdownMenuItem>
-								) : (
-									<DropdownMenuItem>
-										<form action={markAsLow}>
-											<input type='hidden' value={row.original.id} name='itemId' />
-											<button type='button'>Mark as Low</button>
-										</form>
-									</DropdownMenuItem>
-								)}
-								<DropdownMenuSeparator />
+		},
+		{
+			id: 'actions',
+			enableHiding: false,
+			cell: ({ row }) => {
+				return (
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
+							<Button variant='ghost' className='h-8 w-8 p-0'>
+								<span className='sr-only'>Open menu</span>
+								<MoreHorizontal className='h-4 w-4' />
+							</Button>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent align='end'>
+							{row.original.isLow ? (
 								<DropdownMenuItem>
-									<form action={deleteAction}>
+									<form action={unmarkAsLow}>
 										<input type='hidden' value={row.original.id} name='itemId' />
-										<button type='button' className='text-red-500 hover:text-red-400'>
-											Remove
-										</button>
+										<button type='button'>Unmark as Low</button>
 									</form>
 								</DropdownMenuItem>
-							</DropdownMenuContent>
-						</DropdownMenu>
-					)
-				},
+							) : (
+								<DropdownMenuItem>
+									<form action={markAsLow}>
+										<input type='hidden' value={row.original.id} name='itemId' />
+										<button type='button'>Mark as Low</button>
+									</form>
+								</DropdownMenuItem>
+							)}
+							<DropdownMenuSeparator />
+							<DropdownMenuItem>
+								<form action={deleteAction}>
+									<input type='hidden' value={row.original.id} name='itemId' />
+									<button type='button' className='text-red-500 hover:text-red-400'>
+										Remove
+									</button>
+								</form>
+							</DropdownMenuItem>
+						</DropdownMenuContent>
+					</DropdownMenu>
+				)
 			},
-		],
-		[decrementAction, incrementAction, unmarkAsLow, markAsLow, deleteAction],
-	)
+		},
+	]
 
 	const table = useReactTable({
 		data: items,
@@ -162,8 +160,9 @@ export function ItemsTable({ items }: { items: Item[] }) {
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
 		state: {
-			sorting: [{ id: 'name', desc: false }],
+			sorting,
 		},
+		onSortingChange: setSorting,
 	})
 
 	return (
@@ -174,7 +173,25 @@ export function ItemsTable({ items }: { items: Item[] }) {
 						{table.getHeaderGroups().map(headerGroup => (
 							<TableRow key={headerGroup.id}>
 								{headerGroup.headers.map(header => {
-									return <TableHead key={header.id}>{header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}</TableHead>
+									return (
+										<TableHead key={header.id}>
+											{' '}
+											{header.isPlaceholder ? null : (
+												<div
+													{...{
+														className: header.column.getCanSort() ? 'cursor-pointer select-none' : '',
+														onClick: header.column.getToggleSortingHandler(),
+													}}
+												>
+													{flexRender(header.column.columnDef.header, header.getContext())}
+													{{
+														asc: ' ↑',
+														desc: '↓',
+													}[header.column.getIsSorted() as string] ?? null}
+												</div>
+											)}
+										</TableHead>
+									)
 								})}
 							</TableRow>
 						))}

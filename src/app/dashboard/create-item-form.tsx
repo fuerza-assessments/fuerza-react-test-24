@@ -16,7 +16,7 @@ export function CreateItemForm() {
 	const [formState, onCreateItemAction] = useFormState(createItemAction, {
 		form: {
 			name: '',
-			quantity: '2',
+			quantity: '5',
 		},
 		status: 'default',
 	})
@@ -39,7 +39,7 @@ export function CreateItemForm() {
 			{formState.status === 'error' && (
 				<Alert variant={'destructive'}>
 					<Terminal className='h-4 w-4' />
-					<AlertTitle>Uh oh!</AlertTitle>
+					<AlertTitle>Something went wrong!</AlertTitle>
 					<AlertDescription>{formState.errors}</AlertDescription>
 				</Alert>
 			)}

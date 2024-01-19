@@ -81,5 +81,5 @@ export const authConfig = {
 // Use it in server contexts
 export async function auth(...args: [GetServerSidePropsContext['req'], GetServerSidePropsContext['res']] | [NextApiRequest, NextApiResponse] | []) {
 	const session = await getServerSession(...args, authConfig)
-	return { getUser: () => session?.user && { userId: session.user.id } }
+	return { getUser: () => session?.user && { userId: session.user.id, name: session.user.name } }
 }
