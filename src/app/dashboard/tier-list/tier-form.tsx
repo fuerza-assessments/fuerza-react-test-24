@@ -8,12 +8,12 @@ import { HTMLAttributes, useEffect, useRef } from 'react'
 import { useToast } from '@/components/ui/use-toast'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Terminal } from 'lucide-react'
-import { createItemAction } from './_actions/add-item-to-list.action'
+import { addTierListItemAction } from './_actions/add-item-to-list.action'
 import { cn } from '@/lib/utils'
 
 export function AddItemForm() {
 	const { toast } = useToast()
-	const [formState, onCreateItemAction] = useFormState(createItemAction, {
+	const [formState, onCreateItemAction] = useFormState(addTierListItemAction, {
 		form: {
 			name: '',
 			position: '1',

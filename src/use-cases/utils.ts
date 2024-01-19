@@ -1,5 +1,6 @@
 import { ItemEntity } from '@/entites/item'
-import { CreateItemDto, ItemDto } from '@/use-cases/types'
+import { TierItemEntity } from '@/entites/tier-item'
+import { CreateItemDto, CreateTierItemDto, ItemDto } from '@/use-cases/types'
 
 export class ValidationError extends Error {
 	private errors: Record<string, string | undefined>
@@ -25,6 +26,14 @@ export function itemToCreateItemDtoMapper(item: ItemEntity): CreateItemDto {
 		name: item.getName(),
 		userId: item.getUserId(),
 		quantity: item.getQuantity(),
+	}
+}
+
+export function tierListItemToCreateItemDtoMapper(tierItem: TierItemEntity): CreateTierItemDto {
+	return {
+		name: tierItem.getName(),
+		userId: tierItem.getUserId(),
+		position: tierItem.getPosition(),
 	}
 }
 

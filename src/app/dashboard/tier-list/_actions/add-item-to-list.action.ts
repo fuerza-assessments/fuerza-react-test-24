@@ -1,8 +1,7 @@
 'use server'
 
-import { createItem } from '@/data-access/items/create-item.persistence'
-import { getUserItemByName } from '@/data-access/items/get-items-by-name.persistence'
-import { updateItem } from '@/data-access/items/update-item.persistence'
+import { createTierListItem } from '@/data-access/tier-list/create-tier-list-item.persistence'
+import { getTierListItem } from '@/data-access/tier-list/get-tier-list-item.persistence'
 import { auth } from '@/lib/auth'
 import { addTierListItem } from '@/use-cases/tier-list/add-item.use-case'
 import { ValidationError } from '@/use-cases/utils'
@@ -33,7 +32,7 @@ type SuccessState = {
 
 type CreateItemState = { form: Form } & (SuccessState | SubmitErrorState | FieldErrorsState | DefaultState)
 
-export async function createItemAction(state: CreateItemState, formData: FormData): Promise<CreateItemState> {
+export async function addTierListItemAction(state: CreateItemState, formData: FormData): Promise<CreateItemState> {
 	const { getUser } = await auth()
 
 	const submittedForm = {
@@ -43,12 +42,7 @@ export async function createItemAction(state: CreateItemState, formData: FormDat
 
 	try {
 		await addTierListItem(
-			{
-				getUser,
-				createItem: createItem,
-				updateItem: updateItem,
-				getUserItemByName: getUserItemByName,
-			},
+			{ getUser, createTierListItem, getTierListItem },
 			{
 				name: submittedForm.name.toLowerCase(),
 				position: parseInt(submittedForm.position),

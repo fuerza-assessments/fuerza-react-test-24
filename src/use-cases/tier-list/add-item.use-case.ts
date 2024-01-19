@@ -1,43 +1,51 @@
-import { ItemEntity, ItemEntityValidationError } from '@/entites/item'
-import { AuthenticationError, itemToDto, ValidationError, itemToCreateItemDtoMapper } from '@/use-cases/utils'
-import { AddItem, CreateItem, GetUser, GetUserItemByName, UpdateItem } from '@/use-cases/types'
+import { TierItemEntity, TierItemEntityValidationError } from '@/entites/tier-item'
+import { AuthenticationError, ValidationError, tierListItemToCreateItemDtoMapper } from '@/use-cases/utils'
+import type { GetUser, CreateTierItem, GetUserTierListItem } from '@/use-cases/types'
 
-export async function addTierListItem(
-	context: {
-		addItem: AddItem
-		getUser: GetUser
-		createItem: CreateItem
-		updateItem: UpdateItem
-		getUserItemByName: GetUserItemByName
-	},
-	data: { name: string; quantity: number },
-) {
-	const user = context.getUser()
+type TierItem = {
+	name: string
+	position: number
+}
+
+type CTX = {
+	createTierListItem: CreateTierItem
+	getTierListItem: GetUserTierListItem
+	getUser: GetUser
+}
+
+export async function addTierListItem(ctx: CTX, data: TierItem) {
+	const user = ctx.getUser()
 
 	if (!user) {
 		throw new AuthenticationError()
 	}
 
-	const existingItem = await context.getUserItemByName(user.userId, data.name)
+	const existingTierListItem = await ctx.getTierListItem({
+		userId: user.userId,
+		name: data.name,
+		position: data.position,
+	})
 
-	if (existingItem) {
-		const updatedItem = new ItemEntity({
-			...existingItem,
-			quantity: existingItem.quantity + data.quantity,
-		})
-		await context.updateItem(itemToDto(updatedItem))
-		return
+	if (existingTierListItem) {
+		const tierListItem = new TierItemEntity(existingTierListItem)
+
+		if (tierListItem.getPosition() === data.position && tierListItem.getName() === data.name) {
+			return 'Tier item already exist!'
+		}
+		if (tierListItem.getPosition() === data.position) {
+			return 'Position already exist!'
+		}
+
+		if (tierListItem.getName() === data.name) {
+			return 'Name already exist!'
+		}
 	}
 
 	try {
-		const newItem = new ItemEntity({
-			quantity: data.quantity,
-			name: data.name,
-			userId: user.userId,
-		})
-		await context.createItem(itemToCreateItemDtoMapper(newItem))
+		const newTierItem = new TierItemEntity({ position: data.position, name: data.name, userId: user.userId })
+		await ctx.createTierListItem(tierListItemToCreateItemDtoMapper(newTierItem))
 	} catch (err) {
-		const error = err as ItemEntityValidationError
+		const error = err as TierItemEntityValidationError
 		throw new ValidationError(error.getErrors())
 	}
 }
