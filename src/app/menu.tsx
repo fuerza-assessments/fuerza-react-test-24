@@ -14,6 +14,14 @@ const currentMenu = tv({
 
 export const Menu = () => {
 	const pathname = usePathname()
+
+	const links = [
+		{
+			link: 'stock',
+			path: '/dashboard',
+		},
+	]
+
 	return (
 		<nav className='ml-8 flex space-x-4'>
 			{pathname}
