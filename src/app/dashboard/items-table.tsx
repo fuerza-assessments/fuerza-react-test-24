@@ -24,7 +24,7 @@ export type Item = {
 
 export function ItemsTable({ items }: { items: Item[] }) {
 	const { toast } = useToast()
-	const [sorting, setSorting] = React.useState<SortingState>([])
+	const [sorting, setSorting] = React.useState<SortingState>([{ id: 'name', desc: false }])
 
 	const [unmarkLowState, unmarkAsLow] = useFormState(unmarkAsLowAction, {
 		showToast: false,
@@ -90,10 +90,12 @@ export function ItemsTable({ items }: { items: Item[] }) {
 		{
 			accessorKey: 'name',
 			header: 'Name',
+			enableSorting: true,
 		},
 		{
 			accessorKey: 'quantity',
 			header: 'Quantity',
+			enableSorting: false,
 			cell: ({ row }) => {
 				return (
 					<form className='flex gap-2 items-center'>
@@ -175,7 +177,6 @@ export function ItemsTable({ items }: { items: Item[] }) {
 								{headerGroup.headers.map(header => {
 									return (
 										<TableHead key={header.id}>
-											{' '}
 											{header.isPlaceholder ? null : (
 												<div
 													{...{

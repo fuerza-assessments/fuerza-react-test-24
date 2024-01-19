@@ -3,7 +3,6 @@ import { DrizzleAdapter } from '@auth/drizzle-adapter'
 import type { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from 'next'
 import { AuthOptions, DefaultSession, getServerSession } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
-import GoogleProvider from 'next-auth/providers/google'
 import Auth0Provider from 'next-auth/providers/auth0'
 
 import { env } from '@/env'
@@ -22,10 +21,6 @@ export const authConfig = {
 		strategy: 'jwt',
 	},
 	providers: [
-		GoogleProvider({
-			clientId: env.GOOGLE_ID,
-			clientSecret: env.GOOGLE_SECRET,
-		}),
 		GithubProvider({
 			clientId: env.GITHUB_ID,
 			clientSecret: env.GITHUB_SECRET,
