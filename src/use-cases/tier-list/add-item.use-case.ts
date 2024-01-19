@@ -2,7 +2,7 @@ import { ItemEntity, ItemEntityValidationError } from '@/entites/item'
 import { AuthenticationError, itemToDto, ValidationError, itemToCreateItemDtoMapper } from '@/use-cases/utils'
 import { AddItem, CreateItem, GetUser, GetUserItemByName, UpdateItem } from '@/use-cases/types'
 
-export async function createItemUseCase(
+export async function addTierListItem(
 	context: {
 		addItem: AddItem
 		getUser: GetUser
