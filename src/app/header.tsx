@@ -13,7 +13,7 @@ const MenuComponent = async () => {
 	}
 
 	return (
-		<nav className='ml-8'>
+		<nav className='ml-8 flex space-x-4'>
 			<Link href='/api/auth/signout'>Teste</Link>
 			<Link href='/api/auth/signout'>Teste</Link>
 		</nav>
