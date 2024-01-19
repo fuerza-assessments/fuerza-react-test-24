@@ -15,5 +15,11 @@
       "name": "Fuerte",
       "connectString": "postgresql://postgres:docker@localhost:5435/postgres"
     }
+  ],
+  "tailwindCSS.experimental.classRegex": [
+    [
+      "tv\\((([^()]*|\\([^()]*\\))*)\\)",
+      "[\"'`]([^\"'`]*).*?[\"'`]"
+    ]
   ]
 }
