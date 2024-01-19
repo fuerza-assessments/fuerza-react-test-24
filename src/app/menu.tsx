@@ -29,7 +29,7 @@ export const Menu = () => {
 	return (
 		<nav className='ml-8 flex space-x-4'>
 			{links.map(e => (
-				<Link className={currentMenu()} href={e.path}>
+				<Link className={currentMenu({ active: e.path === pathname })} href={e.path}>
 					{e.label}
 				</Link>
 			))}
