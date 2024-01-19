@@ -29,12 +29,12 @@ export const Menu = () => {
 	return (
 		<nav className='ml-8 flex space-x-4'>
 			{pathname}
-			<Link className={currentMenu({ active: pathname === '/dashboard' })} href='/dashboard'>
-				stock
-			</Link>
-			<Link className={currentMenu()} href='/dashboard/tier-list'>
-				tier-list
-			</Link>
+
+			{links.map(e => (
+				<Link className={currentMenu()} href={e.path}>
+					tier-list
+				</Link>
+			))}
 		</nav>
 	)
 }
