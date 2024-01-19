@@ -3,9 +3,7 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { cva } from 'class-variance-authority'
 
-const currentMenu = cva({
-	base: 'text-red-fuerza',
-})
+const currentMenu = cva(['text-red-fuerza'], {})
 
 export const Menu = () => {
 	const pathname = usePathname()
