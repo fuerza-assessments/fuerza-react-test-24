@@ -4,7 +4,7 @@ import { createItem } from '@/data-access/items/create-item.persistence'
 import { getUserItemByName } from '@/data-access/items/get-items-by-name.persistence'
 import { updateItem } from '@/data-access/items/update-item.persistence'
 import { auth } from '@/lib/auth'
-import { createItemUseCase } from '@/use-cases/tier-list/add-item.use-case'
+import { addTierListItem } from '@/use-cases/tier-list/add-item.use-case'
 import { ValidationError } from '@/use-cases/utils'
 import { revalidatePath } from 'next/cache'
 
@@ -42,7 +42,7 @@ export async function createItemAction(state: CreateItemState, formData: FormDat
 	}
 
 	try {
-		await createItemUseCase(
+		await addTierListItem(
 			{
 				getUser,
 				createItem: createItem,
