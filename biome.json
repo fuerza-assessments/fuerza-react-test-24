@@ -27,5 +27,14 @@
     "rules": {
       "recommended": true
     }
-  }
+  },
+    "files": {
+      "include": [
+        "scripts/**/*.js",
+        "src/**/*.js"
+      ],
+      "ignore": [
+        "scripts/**/*.js"
+      ]
+    }
 }
