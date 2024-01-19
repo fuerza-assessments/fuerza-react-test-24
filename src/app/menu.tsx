@@ -17,11 +17,11 @@ export const Menu = () => {
 
 	const links = [
 		{
-			link: 'stock',
+			label: 'stock',
 			path: '/dashboard',
 		},
 		{
-			link: 'tier list',
+			label: 'tier list',
 			path: '/dashboard/tier-list',
 		},
 	]
@@ -32,7 +32,7 @@ export const Menu = () => {
 
 			{links.map(e => (
 				<Link className={currentMenu()} href={e.path}>
-					{e.link}
+					{e.label}
 				</Link>
 			))}
 		</nav>
