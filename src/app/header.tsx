@@ -13,11 +13,10 @@ const MenuComponent = async () => {
 	}
 
 	return (
-		<ul className='ml-8'>
-			<li>
-				<Link href='/api/auth/signout'>Teste</Link>
-			</li>
-		</ul>
+		<nav className='ml-8'>
+			<Link href='/api/auth/signout'>Teste</Link>
+			<Link href='/api/auth/signout'>Teste</Link>
+		</nav>
 	)
 }
 
