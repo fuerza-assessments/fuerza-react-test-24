@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { tv } from 'tailwind-variants'
 
 const currentMenu = tv({
-	base: 'font-medium active:opacity-80',
+	base: 'font-md active:opacity-80 font-versos',
 	variants: {
 		active: {
 			true: 'underline bold',
