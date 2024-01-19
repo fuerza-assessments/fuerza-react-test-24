@@ -3,28 +3,11 @@ import { Button } from '@/components/ui/button'
 import { auth } from '@/lib/auth'
 import Image from 'next/image'
 import Link from 'next/link'
-
-const MenuComponent = async () => {
-	const { getUser } = await auth()
-	const user = getUser()
-
-	if (!user) {
-		return null
-	}
-
-	return (
-		<nav className='ml-8 flex space-x-4'>
-			<Link href='/dashboard'>stock</Link>
-			<Link href='/dashboard/tier-list'>tier-list</Link>
-		</nav>
-	)
-}
+import { Menu } from './menu'
 
 export async function Header() {
 	const { getUser } = await auth()
 	const user = getUser()
-
-	const Menu = user ? <></> : null
 
 	return (
 		<div className='border-b py-4'>
@@ -33,7 +16,7 @@ export async function Header() {
 					<Image src='/logo.png' width='50' height='50' alt='Stock tracker logo' />
 				</Link>
 
-				<MenuComponent />
+				{user ? <Menu /> : null}
 				<div className='ml-auto flex justify-between gap-4'>
 					<ModeToggle />
 
