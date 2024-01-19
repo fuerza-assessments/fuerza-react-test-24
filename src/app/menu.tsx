@@ -21,8 +21,8 @@ export const Menu = () => {
 			path: '/dashboard',
 		},
 		{
-			label: 'tier list',
-			path: '/dashboard/tier-list',
+			label: 'rank list',
+			path: '/dashboard/rank-list',
 		},
 	]
 

@@ -16,21 +16,21 @@ export type User = {
 	userId: string
 }
 
-export type TierItemDto = {
+export type RankItemDto = {
 	id: number
 	name: string
 	position: number
 	userId: string
 }
 
-export type CreateTierItemDto = {
+export type CreateRankItemDto = {
 	name: string
 	userId: string
 	position: number
 }
 
-export type CreateTierItem = (item: CreateTierItemDto) => void
-export type GetUserTierListItem = ({ userId, name, position }: { userId: string; name: string; position: number }) => Promise<TierItemDto | undefined>
+export type CreateRankItem = (item: CreateRankItemDto) => void
+export type GetUserRankListItem = ({ userId, name, position }: { userId: string; name: string; position: number }) => Promise<RankItemDto | undefined>
 
 export type CreateItem = (item: CreateItemDto) => void
 export type DeleteItem = (itemId: number) => void

@@ -1,9 +1,9 @@
 import 'server-only'
 
 import { db } from '@/db'
-import { TierItemDto } from '@/use-cases/types'
+import { RankItemDto } from '@/use-cases/types'
 
-export function toDtoMapper(item: TierItemDto) {
+export function toDtoMapper(item: RankItemDto) {
 	return {
 		id: item.id,
 		name: item.name,
@@ -12,7 +12,7 @@ export function toDtoMapper(item: TierItemDto) {
 	}
 }
 
-export async function getTierListItems(): Promise<TierItemDto[]> {
+export async function getRankListItems(): Promise<RankItemDto[]> {
 	const items = await db.query.tierList.findMany()
 	return items.map(toDtoMapper)
 }

@@ -2,7 +2,7 @@ import { ZodError, z } from 'zod'
 
 type ValidatedFields = 'name' | 'userId' | 'position'
 
-export class TierItemEntityValidationError extends Error {
+export class RankItemEntityValidationError extends Error {
 	private errors: Record<ValidatedFields, string | undefined>
 
 	constructor(errors: Record<ValidatedFields, string | undefined>) {
@@ -22,7 +22,7 @@ type ConstructorType = {
 	position: number
 }
 
-export class TierItemEntity {
+export class RankItemEntity {
 	private id?: number
 	private name: string
 	private position: number
@@ -72,7 +72,7 @@ export class TierItemEntity {
 		} catch (err) {
 			const error = err as ZodError
 			const errors = error.flatten().fieldErrors
-			throw new TierItemEntityValidationError({
+			throw new RankItemEntityValidationError({
 				name: errors.name?.[0],
 				userId: errors.userId?.[0],
 				position: errors.position?.[0],

@@ -17,6 +17,9 @@ export async function Header() {
 				</Link>
 
 				{user ? <Menu /> : null}
+
+				<pre>{JSON.stringify(user, null, 2)}</pre>
+
 				<div className='ml-auto flex justify-between gap-4'>
 					<ModeToggle />
 

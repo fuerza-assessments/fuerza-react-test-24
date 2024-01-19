@@ -58,7 +58,7 @@ export async function createItemAction(state: CreateItemState, formData: FormDat
 		return {
 			form: {
 				name: '',
-				quantity: '1',
+				quantity: '5',
 			},
 			status: 'success',
 		}

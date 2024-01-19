@@ -70,5 +70,5 @@ export const tierList = pgTable('tier_list', {
 		.references(() => users.id, { onDelete: 'cascade' }),
 })
 
-export type TierItem = typeof tierList.$inferSelect
+export type RankItem = typeof tierList.$inferSelect
 export type Item = typeof items.$inferSelect

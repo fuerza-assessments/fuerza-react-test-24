@@ -1,9 +1,9 @@
 'use server'
 
-import { createTierListItem } from '@/data-access/tier-list/create-tier-list-item.persistence'
-import { getTierListItem } from '@/data-access/tier-list/get-tier-list-item.persistence'
+import { createRankListItem } from '@/data-access/rank-list/create-rank-list-item.persistence'
+import { getRankListItem } from '@/data-access/rank-list/get-rank-list-item.persistence'
 import { auth } from '@/lib/auth'
-import { addTierListItem } from '@/use-cases/tier-list/add-item.use-case'
+import { addRankListItem } from '@/use-cases/rank-list/add-item.use-case'
 import { ValidationError } from '@/use-cases/utils'
 import { revalidatePath } from 'next/cache'
 
@@ -32,7 +32,7 @@ type SuccessState = {
 
 type CreateItemState = { form: Form } & (SuccessState | SubmitErrorState | FieldErrorsState | DefaultState)
 
-export async function addTierListItemAction(state: CreateItemState, formData: FormData): Promise<CreateItemState> {
+export async function addRankListItemAction(state: CreateItemState, formData: FormData): Promise<CreateItemState> {
 	const { getUser } = await auth()
 
 	const submittedForm = {
@@ -41,8 +41,8 @@ export async function addTierListItemAction(state: CreateItemState, formData: Fo
 	}
 
 	try {
-		await addTierListItem(
-			{ getUser, createTierListItem, getTierListItem },
+		await addRankListItem(
+			{ getUser, createRankListItem, getRankListItem },
 			{
 				name: submittedForm.name.toLowerCase(),
 				position: parseInt(submittedForm.position),
