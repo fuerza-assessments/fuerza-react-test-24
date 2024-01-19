@@ -32,12 +32,13 @@ export async function addTierListItem(ctx: CTX, data: TierItem) {
 		if (tierListItem.getPosition() === data.position && tierListItem.getName() === data.name) {
 			throw new Error('tier item already exist!')
 		}
-		if (tierListItem.getPosition() === data.position) {
-			throw new Error(`${tierListItem.getName()} is on position ${data.position}`)
-		}
 
 		if (tierListItem.getName() === data.name) {
 			throw new Error(`An item with the name ${data.name} already exists!`)
+		}
+
+		if (tierListItem.getPosition() === data.position) {
+			throw new Error(`${tierListItem.getName()} is on position ${data.position}`)
 		}
 	}
 
