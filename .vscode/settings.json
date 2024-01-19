@@ -2,8 +2,11 @@
   "cSpell.words": [
     "fuerza",
     "lucide",
+    "tanstack",
+    "lucide",
     "tanstack"
   ],
+  "gitdoc.enabled": true,
   "sqltools.connections": [
     {
       "previewLimit": 50,
