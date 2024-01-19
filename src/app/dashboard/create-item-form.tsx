@@ -39,7 +39,7 @@ export function CreateItemForm() {
 			{formState.status === 'error' && (
 				<Alert variant={'destructive'}>
 					<Terminal className='h-4 w-4' />
-					<AlertTitle>Uh oh!</AlertTitle>
+					<AlertTitle>Oops!</AlertTitle>
 					<AlertDescription>{formState.errors}</AlertDescription>
 				</Alert>
 			)}
