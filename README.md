@@ -1,4 +1,4 @@
-O teste consiste em criar Pull Requests (PRs) para issues listadas no repositório (https://github.com/fuerza-studio/react-test-24).
+O teste consiste em criar Pull Requests (PRs) para issues listadas no repositório
 
 ### Detalhes do Teste:
 - Objetivo: Não é necessário resolver todas as issues, mas sim demonstrar habilidade em abordá-las.
