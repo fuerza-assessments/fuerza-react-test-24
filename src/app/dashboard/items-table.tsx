@@ -175,7 +175,6 @@ export function ItemsTable({ items }: { items: Item[] }) {
 								{headerGroup.headers.map(header => {
 									return (
 										<TableHead key={header.id}>
-											{' '}
 											{header.isPlaceholder ? null : (
 												<div
 													{...{
