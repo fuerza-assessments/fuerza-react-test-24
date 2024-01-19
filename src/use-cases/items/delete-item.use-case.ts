@@ -1,5 +1,5 @@
-import { GetUser, DeleteItem } from './types'
-import { AuthenticationError } from './utils'
+import { GetUser, DeleteItem } from '@/use-cases/types'
+import { AuthenticationError } from '@/use-cases/utils'
 
 export async function deleteItemUseCase(context: { getUser: GetUser; deleteItem: DeleteItem }, data: { itemId: number }) {
 	const user = context.getUser()

@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { useEffect, useMemo } from 'react'
-import { ColumnDef, Row, flexRender, getCoreRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
+import { ColumnDef, flexRender, getCoreRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
 import { Minus, MoreHorizontal, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'

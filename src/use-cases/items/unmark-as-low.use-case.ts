@@ -1,6 +1,6 @@
 import { ItemEntity } from '@/entites/item'
-import { AuthenticationError, itemToDto } from './utils'
-import type { GetUser, UpdateItem, GetItem } from './types'
+import { AuthenticationError, itemToDto } from '@/use-cases/utils'
+import type { GetUser, UpdateItem, GetItem } from '@/use-cases/types'
 
 export async function unmarkAsLowUseCase(
 	context: {

@@ -2,6 +2,7 @@ import { ItemsTable } from './items-table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getItems } from '@/data-access/items/get-items.persistence'
 import { partition } from 'lodash'
+import { CreateItemForm } from './create-item-form'
 
 export default async function Dashboard() {
 	const items = await getItems()
@@ -30,6 +31,9 @@ export default async function Dashboard() {
 						<ItemsTable items={outOfItems} />
 					</TabsContent>
 				</Tabs>
+			</div>
+			<div className='col-span-3 md:col-span-1'>
+				<CreateItemForm />
 			</div>
 		</>
 	)

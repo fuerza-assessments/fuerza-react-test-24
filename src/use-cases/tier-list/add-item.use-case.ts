@@ -1,9 +1,10 @@
 import { ItemEntity, ItemEntityValidationError } from '@/entites/item'
 import { AuthenticationError, itemToDto, ValidationError, itemToCreateItemDtoMapper } from '@/use-cases/utils'
-import { CreateItem, GetUser, GetUserItemByName, UpdateItem } from '@/use-cases/types'
+import { AddItem, CreateItem, GetUser, GetUserItemByName, UpdateItem } from '@/use-cases/types'
 
 export async function createItemUseCase(
 	context: {
+		addItem: AddItem
 		getUser: GetUser
 		createItem: CreateItem
 		updateItem: UpdateItem

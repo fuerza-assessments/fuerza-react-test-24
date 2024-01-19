@@ -3,5 +3,14 @@
     "fuerza",
     "lucide",
     "tanstack"
+  ],
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "driver": "PostgreSQL",
+      "name": "Fuerte",
+      "connectString": "postgresql://postgres:docker@localhost:5435/postgres"
+    }
   ]
 }

@@ -1,6 +1,6 @@
 import { ItemEntity } from '@/entites/item'
-import { AuthenticationError, itemToDto } from './utils'
-import { GetUser, UpdateItem, GetItem, ItemDto } from './types'
+import { AuthenticationError, itemToDto } from '@/use-cases/utils'
+import { GetUser, UpdateItem, GetItem, ItemDto } from '@/use-cases/types'
 
 export async function incrementItemUseCase(
 	context: { getUser: GetUser; updateItem: UpdateItem; getItem: GetItem },

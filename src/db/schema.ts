@@ -61,4 +61,13 @@ export const items = pgTable('items', {
 	isLow: boolean('isLow').notNull().default(false),
 })
 
+export const tierList = pgTable('tier_list', {
+	id: serial('id').primaryKey(),
+	name: varchar('name', { length: 256 }).notNull(),
+	position: integer('position').notNull().default(0),
+	userId: text('userId')
+		.notNull()
+		.references(() => users.id, { onDelete: 'cascade' }),
+})
+
 export type Item = typeof items.$inferSelect

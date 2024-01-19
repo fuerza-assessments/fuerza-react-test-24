@@ -4,7 +4,7 @@ import { db } from '@/db'
 import { items } from '@/db/schema'
 import { eq, and } from 'drizzle-orm'
 import { toDtoMapper } from './get-item.persistence'
-import { ItemDto } from '@/use-cases/items/types'
+import { ItemDto } from '@/use-cases/types'
 
 export async function getUserItemByName(userId: string, name: string): Promise<ItemDto | undefined> {
 	const foundItem = await db.query.items.findFirst({

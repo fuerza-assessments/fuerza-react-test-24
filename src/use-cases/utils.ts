@@ -1,5 +1,5 @@
 import { ItemEntity } from '@/entites/item'
-import { CreateItemDto, ItemDto } from './types'
+import { CreateItemDto, ItemDto } from '@/use-cases/types'
 
 export class ValidationError extends Error {
 	private errors: Record<string, string | undefined>

@@ -4,13 +4,13 @@ import { createItem } from '@/data-access/items/create-item.persistence'
 import { getUserItemByName } from '@/data-access/items/get-items-by-name.persistence'
 import { updateItem } from '@/data-access/items/update-item.persistence'
 import { auth } from '@/lib/auth'
-import { createItemUseCase } from '@/use-cases/items/create-item.use-case'
+import { createItemUseCase } from '@/use-cases/tier-list/add-item.use-case'
 import { ValidationError } from '@/use-cases/utils'
 import { revalidatePath } from 'next/cache'
 
 type Form = {
 	name: string
-	quantity: string
+	position: string
 }
 
 type FieldErrorsState = {
@@ -38,7 +38,7 @@ export async function createItemAction(state: CreateItemState, formData: FormDat
 
 	const submittedForm = {
 		name: formData.get('name') as string,
-		quantity: formData.get('quantity') as string,
+		position: formData.get('position') as string,
 	}
 
 	try {
@@ -51,14 +51,14 @@ export async function createItemAction(state: CreateItemState, formData: FormDat
 			},
 			{
 				name: submittedForm.name.toLowerCase(),
-				quantity: parseInt(submittedForm.quantity),
+				position: parseInt(submittedForm.position),
 			},
 		)
 		revalidatePath('/')
 		return {
 			form: {
 				name: '',
-				quantity: '1',
+				position: '1',
 			},
 			status: 'success',
 		}

@@ -3,7 +3,7 @@ import 'server-only'
 import { db } from '@/db'
 import { Item, items } from '@/db/schema'
 import { eq } from 'drizzle-orm'
-import { ItemDto } from '@/use-cases/items/types'
+import { ItemDto } from '@/use-cases/types'
 
 export type ItemId = number
 
