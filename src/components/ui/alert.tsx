@@ -1,7 +1,6 @@
-import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 import { forwardRef, HTMLAttributes } from 'react'
-import { tv } from 'tailwind-variants'
+import { tv, type VariantProps } from 'tailwind-variants'
 
 const alertVariants = tv({
 	base: 'relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground',
