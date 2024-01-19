@@ -8,6 +8,8 @@ export async function Header() {
 	const { getUser } = await auth()
 	const user = getUser()
 
+	const menu = user ? <></> : null
+
 	return (
 		<div className='border-b py-4'>
 			<div className='container mx-auto flex justify-between items-center'>
