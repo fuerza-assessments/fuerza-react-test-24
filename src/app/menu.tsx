@@ -20,6 +20,10 @@ export const Menu = () => {
 			link: 'stock',
 			path: '/dashboard',
 		},
+		{
+			link: 'tier list',
+			path: '/dashboard/tier-list',
+		},
 	]
 
 	return (
