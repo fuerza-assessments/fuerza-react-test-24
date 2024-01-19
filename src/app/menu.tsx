@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-const MenuComponent = () => {
+export const Menu = () => {
 	return (
 		<nav className='ml-8 flex space-x-4'>
 			<Link href='/dashboard'>stock</Link>
