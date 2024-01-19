@@ -90,10 +90,12 @@ export function ItemsTable({ items }: { items: Item[] }) {
 		{
 			accessorKey: 'name',
 			header: 'Name',
+			enableSorting: true,
 		},
 		{
 			accessorKey: 'quantity',
 			header: 'Quantity',
+			enableSorting: false,
 			cell: ({ row }) => {
 				return (
 					<form className='flex gap-2 items-center'>
