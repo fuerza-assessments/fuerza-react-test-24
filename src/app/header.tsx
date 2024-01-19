@@ -29,7 +29,7 @@ export async function Header() {
 
 	return (
 		<div className='border-b py-4'>
-			<div className='container mx-auto flex justify-between items-center'>
+			<div className='container mx-auto flex items-center'>
 				<Link href='/' className='flex gap-1 items-center text-xl'>
 					<Image src='/logo.png' width='50' height='50' alt='Stock tracker logo' />
 				</Link>
