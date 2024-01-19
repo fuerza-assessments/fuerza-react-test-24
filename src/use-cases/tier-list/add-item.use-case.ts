@@ -30,7 +30,7 @@ export async function addTierListItem(ctx: CTX, data: TierItem) {
 		const tierListItem = new TierItemEntity(existingTierListItem)
 
 		if (tierListItem.getPosition() === data.position && tierListItem.getName() === data.name) {
-			throw new Error('tier item already exist!')
+			throw new Error('rank item already exist!')
 		}
 
 		if (tierListItem.getName() === data.name) {
