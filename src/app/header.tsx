@@ -7,7 +7,7 @@ import { Menu } from './menu'
 
 export async function Header() {
 	const { getUser } = await auth()
-	const user = getUser()
+	let user = getUser()
 
 	return (
 		<div className='border-b py-4'>
