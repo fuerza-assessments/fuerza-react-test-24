@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { tv } from 'tailwind-variants'
 
 const currentMenu = tv({
-	base: 'font-versos',
+	base: 'font-versos hover:opacity-50',
 	variants: {
 		active: {
 			true: 'underline font-bold opacity-80',
@@ -29,7 +29,7 @@ export const Menu = () => {
 	return (
 		<nav className='ml-8 flex space-x-4'>
 			{links.map(e => (
-				<Link className={currentMenu({ active: e.path === pathname })} href={e.path}>
+				<Link key={e.path} className={currentMenu({ active: e.path === pathname })} href={e.path}>
 					{e.label}
 				</Link>
 			))}
