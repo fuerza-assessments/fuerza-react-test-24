@@ -34,7 +34,9 @@ export async function addTierListItem(ctx: CTX, data: TierItem) {
 		}
 
 		if (tierListItem.getName() === data.name) {
-			throw new Error(`An item with the name ${data.name} already exists and is on position ${tierListItem.getPosition()}!`)
+			throw new Error(
+				`The item you are trying to add, named "[Item Name]", already exists in the tier list. It is currently placed in Tier [Existing Item Tier Position]. If this is a different item with a similar name, please consider renaming it for clarity. To modify the existing item's position or details, navigate to its current placement. For further assistance, please consult our help guide or contact support.`,
+			)
 		}
 
 		if (tierListItem.getPosition() === data.position) {
