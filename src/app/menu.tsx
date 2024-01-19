@@ -7,8 +7,8 @@ const currentMenu = tv({
 	base: 'font-medium bg-blue-500 text-white rounded-full active:opacity-80',
 	variants: {
 		active: {
-			true: 
-		}
+			true: 'underline',
+		},
 	},
 })
 
