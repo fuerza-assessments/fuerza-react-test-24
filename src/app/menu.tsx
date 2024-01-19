@@ -32,7 +32,7 @@ export const Menu = () => {
 
 			{links.map(e => (
 				<Link className={currentMenu()} href={e.path}>
-					tier-list
+					{e.link}
 				</Link>
 			))}
 		</nav>
