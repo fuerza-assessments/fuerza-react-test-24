@@ -4,7 +4,7 @@ import { auth } from '@/lib/auth'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const Menu = async () => {
+const MenuComponent = async () => {
 	const { getUser } = await auth()
 	const user = getUser()
 
@@ -34,6 +34,7 @@ export async function Header() {
 					<Image src='/logo.png' width='50' height='50' alt='Stock tracker logo' />
 				</Link>
 
+				<MenuComponent />
 				<div className='flex justify-between gap-4'>
 					<ModeToggle />
 
