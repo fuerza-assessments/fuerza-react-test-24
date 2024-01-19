@@ -38,7 +38,7 @@ export async function addTierListItem(ctx: CTX, data: TierItem) {
 		}
 
 		if (tierListItem.getPosition() === data.position) {
-			throw new Error(`${tierListItem.getName()} is on position ${data.position}`)
+			throw new Error(`The position you are trying to assign to this item is already occupied by ${tierListItem.getName()}`)
 		}
 	}
 
