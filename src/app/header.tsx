@@ -13,7 +13,7 @@ const MenuComponent = async () => {
 	}
 
 	return (
-		<ul>
+		<ul className='ml-8'>
 			<li>
 				<Link href='/api/auth/signout'>Teste</Link>
 			</li>
