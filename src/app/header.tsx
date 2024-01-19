@@ -15,7 +15,7 @@ const MenuComponent = async () => {
 	return (
 		<nav className='ml-8 flex space-x-4'>
 			<Link href='/dashboard'>stock</Link>
-			<Link href='/api/auth/signout'>tier-list</Link>
+			<Link href='/dashboard/tier-list'>tier-list</Link>
 		</nav>
 	)
 }
