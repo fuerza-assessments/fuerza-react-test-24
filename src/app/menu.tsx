@@ -1,11 +1,30 @@
 'use client'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { cva } from 'class-variance-authority'
+import { tv } from 'tailwind-variants'
 
-const currentMenu = cva(['text-red-fuerza'], {
+const currentMenu = tv({
+	base: 'font-medium bg-blue-500 text-white rounded-full active:opacity-80',
 	variants: {
-		current: {},
+		color: {
+			primary: 'bg-blue-500 text-white',
+			secondary: 'bg-purple-500 text-white',
+		},
+		size: {
+			sm: 'text-sm',
+			md: 'text-base',
+			lg: 'px-4 py-3 text-lg',
+		},
+	},
+	compoundVariants: [
+		{
+			size: ['sm', 'md'],
+			class: 'px-3 py-1',
+		},
+	],
+	defaultVariants: {
+		size: 'md',
+		color: 'primary',
 	},
 })
 
