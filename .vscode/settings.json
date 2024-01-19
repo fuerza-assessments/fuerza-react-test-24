@@ -6,7 +6,7 @@
     "lucide",
     "tanstack"
   ],
-  "gitdoc.enabled": false,
+  "gitdoc.enabled": true,
   "sqltools.connections": [
     {
       "previewLimit": 50,
