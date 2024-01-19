@@ -4,11 +4,28 @@ import { auth } from '@/lib/auth'
 import Image from 'next/image'
 import Link from 'next/link'
 
+const Menu = async () => {
+	const { getUser } = await auth()
+	const user = getUser()
+
+	if (!user) {
+		return null
+	}
+
+	return (
+		<ul>
+			<li>
+				<Link href='/api/auth/signout'>Teste</Link>
+			</li>
+		</ul>
+	)
+}
+
 export async function Header() {
 	const { getUser } = await auth()
 	const user = getUser()
 
-	const menu = user ? <></> : null
+	const Menu = user ? <></> : null
 
 	return (
 		<div className='border-b py-4'>
