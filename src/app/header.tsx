@@ -23,7 +23,7 @@ export async function Header() {
 
 					{user ? (
 						<Link href='/api/auth/signout'>
-							<Button>Sign Out</Button>
+							<Button>{user.name} - Sign Out</Button>
 						</Link>
 					) : (
 						<Link href='/api/auth/signin/'>
