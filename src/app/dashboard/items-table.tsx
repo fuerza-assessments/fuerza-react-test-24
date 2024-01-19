@@ -24,7 +24,7 @@ export type Item = {
 
 export function ItemsTable({ items }: { items: Item[] }) {
 	const { toast } = useToast()
-	const [sorting, setSorting] = React.useState<SortingState>([{ id: 'quantity', desc: false }])
+	const [sorting, setSorting] = React.useState<SortingState>([{ id: 'name', desc: false }])
 
 	const [unmarkLowState, unmarkAsLow] = useFormState(unmarkAsLowAction, {
 		showToast: false,
