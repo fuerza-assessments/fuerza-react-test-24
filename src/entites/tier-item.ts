@@ -15,23 +15,20 @@ export class TierItemEntityValidationError extends Error {
 	}
 }
 
+type ConstructorType = {
+	id?: number
+	name: string
+	userId: string
+	position: number
+}
+
 export class TierItemEntity {
 	private id?: number
 	private name: string
 	private position: number
 	private userId: string
 
-	constructor({
-		id,
-		name,
-		userId,
-		position,
-	}: {
-		id?: number
-		name: string
-		userId: string
-		position: number
-	}) {
+	constructor({ id, name, userId, position }: ConstructorType) {
 		this.id = id
 		this.name = name
 		this.userId = userId
